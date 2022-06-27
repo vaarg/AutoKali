@@ -1,5 +1,8 @@
 #!/bin/bash
 
+check=0
+ARGS=$@
+PROGNAME=$(basename $0)
 GREEN="\e[32m"
 RED="\e[31m"
 ENDCOLOR="\e[0m"
@@ -108,6 +111,7 @@ function programsAptGem() { ## APT/GEM Programs:
         sudo apt update
         aptInstall code
     fi
+    check=1
 }
 
 function programsGit() { ## GIT Programs:
@@ -161,8 +165,15 @@ function metasploitInit() { ## Metasploit Exploit-DB Init:
 }
 
 function pipInstall() { ## PIP Packages:
-    pip3 install pycryptodomex          # Python Encryption library
-    pip3 install pyftplib               # Python FTP library
+    if [ $check == 1 ]
+    then
+        pip3 install pycryptodomex          # Python Encryption library
+        pip3 install pyftplib               # Python FTP library
+    else
+        aptInstall python2 python-pip               # Py2 PIP
+        aptInstall python3 python3-pip              # Py3 PIP
+        check=1
+        pipInstall
 }
 
 ## Kali Repository Sync:
