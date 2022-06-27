@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.4
+# AutoKali v 1.0.5
 
 check=0
 ARGS=$@
@@ -20,7 +20,7 @@ function aptInstall() {
         checkInstall $APP
         if [ "$?" -eq 0 ]
         then
-            echo -e "${CYAN}\r\n[+] $APP is already installed!\r\n${ENDCOLOR}"
+            echo -e "${CYAN}\r\n[*] $APP is already installed!\r\n${ENDCOLOR}"
             return 1
         else
             echo -e "${GREEN}\r\n[+] Installing $APP!\r\n${ENDCOLOR}"
@@ -174,7 +174,7 @@ function programsGit() { ## GIT Programs:
 
 function metasploitInit() { ## Metasploit Exploit-DB Init:
     sudo systemctl start postgresql && sudo msfdb init
-    sudo update-rc.d postgresql enable && sudo service metasploit start && sudo service metasploit restart
+    # sudo update-rc.d postgresql enable && sudo service metasploit start && sudo service metasploit restart
 }
 
 function pipInstall() { ## PIP Packages:
