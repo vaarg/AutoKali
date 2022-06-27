@@ -1,2 +1,5 @@
 # AutoKali
-Auto installs needed programs and scripts not pre-installed on Kali.
+Auto installs useful programs and scripts for recon, enumeration and exploitation.
+
+## Usage:
+    ./AutoKali.sh
