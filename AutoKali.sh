@@ -1,8 +1,11 @@
 #!/bin/bash
 
+# AutoKali v 1.0
+
 check=0
 ARGS=$@
 PROGNAME=$(basename $0)
+CYAN="\e[36m"
 GREEN="\e[32m"
 RED="\e[31m"
 ENDCOLOR="\e[0m"
@@ -17,9 +20,10 @@ function aptInstall() {
         checkInstall $APP
         if [ "$?" -eq 0 ]
         then
-            echo -e "${GREEN}\r[+] $APP is already installed!\r${ENDCOLOR}"
+            echo -e "${CYAN}\r[+] $APP is already installed!\r${ENDCOLOR}"
             return 1
         else
+            echo -e "${GREEN}\r[+] Installing $APP!\r${ENDCOLOR}"
             sudo apt install $APP
             return 0
         fi
@@ -32,9 +36,10 @@ function gemInstall() {
         checkInstall $APP
         if [ "$?" -eq 0 ]
         then
-            echo -e "${GREEN}\r[+] $APP is already installed!\r${ENDCOLOR}"
+            echo -e "${CYAN}\r[*] $APP is already installed!\r${ENDCOLOR}"
             return 1
         else
+            echo -e "${GREEN}\r[+] Installing $APP!\r${ENDCOLOR}"
             sudo gem install $APP
             return 0
         fi
@@ -71,12 +76,20 @@ function programsAptGem() { ## APT/GEM Programs:
         export GOROOT=/usr/lib/go
         export GOPATH=$HOME/go
         export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-        source .bashrc
+        # source .bashrc
     else
         return 1
     fi
-    aptInstall python2 python-pip               # Py2 PIP
-    aptInstall python3 python3-pip              # Py3 PIP
+    aptInstall libwacom-common                  # Required library that breaks apt upgrade if not installed
+    if [ "$?" -eq 0 ]
+    then
+        kaliSync
+    else
+        return 1
+    fi
+    aptInstall python2
+    aptInstall python-pip               # Py2 PIP
+    aptInstall python3-pip              # Py3 PIP
 
     # Recon:
     aptInstall amass                            # OWASP Domain surface mapper
@@ -115,14 +128,14 @@ function programsAptGem() { ## APT/GEM Programs:
 }
 
 function programsGit() { ## GIT Programs:
-    cd ~/Desktop && gitFolderCreate Recon&EnumTools
+    cd ~/Desktop && gitFolderCreate ReconAndEnumTools
 
     # PortEnum:
     gitFolderCreate PortEnum
     gitInstall https://github.com/vaarg/Gatherum
 
     # LinuxEnum:
-    cd ~/Desktop/Recon&EnumTools && gitFolderCreate LinuxEnum
+    cd ~/Desktop/ReconAndEnumTools && gitFolderCreate LinuxEnum
     curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh > linpeas.sh
     gitInstall https://github.com/rebootuser/LinEnum
     gitInstall https://github.com/mzet-/linux-exploit-suggester
@@ -130,7 +143,7 @@ function programsGit() { ## GIT Programs:
     gitInstall https://github.com/diego-treitos/linux-smart-enumeration
 
     # WinEnum:
-    cd ~/Desktop/Recon&EnumTools && gitFolderCreate WinEnum
+    cd ~/Desktop/ReconAndEnumTools && gitFolderCreate WinEnum
     curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/winPEASx64.exe > winPEASx64.exe
     curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/winPEASx86.exe > winPEASx86.exe
     gitInstall https://github.com/PowerShellMafia/PowerSploit #PowerUp.ps1 (WinEnum) and PowerView.ps1 (for AD)
@@ -143,14 +156,14 @@ function programsGit() { ## GIT Programs:
     gitInstall https://github.com/411Hall/JAWS
 
     # ActiveDirectory
-    cd ~/Desktop/Recon&EnumTools && gitFolderCreate ActiveDirectory
+    cd ~/Desktop/ReconAndEnumTools && gitFolderCreate ActiveDirectory
     curl -L https://github.com/ropnop/kerbrute/releases/kerbrute_windows_386.exe > kerbrute_windows_386.exe
     curl -L https://github.com/ropnop/kerbrute/releases/kerbrute_windows_amd64.exe > kerbrute_windows_amd64.exe
     gitInstall https://github.com/BloodHoundAD/BloodHound
     gitInstall https://github.com/GhostPack/Rubeus
 
     # Recon & Info Gathering:
-    cd ~/Desktop/Recon&EnumTools && gitFolderCreate Recon
+    cd ~/Desktop/ReconAndEnumTools && gitFolderCreate Recon
     gitInstall https://github.com/hmaverickadams/breach-parse
     gitInstall https://github.com/tomnomnom/httprobe
     gitInstall https://github.com/tomnomnom/assetfinder # Sudo apt install assetfinder?
@@ -170,20 +183,91 @@ function pipInstall() { ## PIP Packages:
         pip3 install pycryptodomex          # Python Encryption library
         pip3 install pyftplib               # Python FTP library
     else
-        aptInstall python2 python-pip               # Py2 PIP
-        aptInstall python3 python3-pip              # Py3 PIP
+        aptInstall python2 
+        aptInstall python-pip               # Py2 PIP
+        aptInstall python3-pip              # Py3 PIP
         check=1
         pipInstall
     fi
 }
 
-## Kali Repository Sync:
-sudo apt update
+function help() {
+    echo "Usage: $PROGNAME [OPTION ...] [--meta] [-p]
+AutoKali installs useful programs and scripts for recon, enumeration and exploitation.
+Options:
+-h, --help          Display this usage message and exit
+-p, --progs         Install Apt and Gem Programs
+-g, --git           Install Git Programs and Scripts
+-m, --meta          Perform Metasploit Exploit-DB Setup
+-py, --pip          Install Python Pip Packages"
+    exit 1
+}
 
-programsAptGem
-programsGit
-metasploitInit
-pipInstall
+function kaliSync() {
+    ## Kali Repository Sync:
+    sudo apt update    
+}
+
+function main() {
+    if [[ $1 == "-h" ]] || [[ $1 == "--help" ]];
+    then
+        help
+    elif [ $# == 0 ]
+    then
+        read -p "AutoKali will perform the following:
+    [*] Install Apt and Gem Programs
+    [*] Install Git Programs and Scripts
+    [*] Perform Metasploit Exploit-DB Setup
+    [*] Install Python Pip Packages
+[y/N] to continue, or lauch AutoKali with [-h/--help] to see options: " choice
+        if [[ $choice == "y" ]] || [[ $choice == "Y" ]];
+        then
+            echo -e "${GREEN}\r[*] Installing all programs!\r${ENDCOLOR}"
+            kaliSync
+            programsAptGem
+            programsGit
+            metasploitInit
+            pipInstall
+        else
+            echo -e "${RED}Exiting AutoKali\r${ENDCOLOR}"
+            exit 0
+        fi
+    else
+        for ARG in $@
+        do
+            if [[ $ARG != "-p" ]] && [[ $ARG != "--progs" ]] && [[ $ARG != "-g" ]] && [[ $ARG != "--git" ]] && [[ $ARG != "-m" ]] && [[ $ARG != "--meta" ]] && [[ $ARG != "-py" ]] && [[ $ARG != "--pip" ]];
+            then
+                # echo $ARG
+                help
+            fi
+        done
+        kaliSync
+        for ARG in $@
+        do
+            if [[ $ARG == "-p" ]] || [[ $ARG == "--progs" ]];
+            then
+                echo -e "${GREEN}\r[*] Installing Apt and Gem Programs!\r${ENDCOLOR}"
+                programsAptGem
+            elif [[ $ARG == "-g" ]] || [[ $ARG == "--git" ]];
+            then
+                echo -e "${GREEN}\r[*] Installing Git Programs and Scripts!\r${ENDCOLOR}"
+                programsGit
+            elif [[ $ARG == "-m" ]] || [[ $ARG == "--meta" ]];
+            then
+                echo -e "${GREEN}\r[*] Performing Metasploit Exploit-DB Setup!\r${ENDCOLOR}"
+                metasploitInit
+            elif [[ $ARG == "-py" ]] || [[ $ARG == "--pip" ]];
+            then
+                echo "${GREEN}\r[*] Installing Python Pip Packages!\r${ENDCOLOR}"
+                pipInstall
+            fi
+        done  
+    fi
+}
+
+main
 
 # Kali Repository Update:
 sudo apt upgrade
+
+exit 0
