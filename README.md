@@ -15,4 +15,4 @@ Specific installations and changes:
     
 Usage and Help option:
 
-    ./AutoKali.sh --help
+    ./AutoKali.sh --help        (or [-h])
