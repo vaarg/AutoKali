@@ -14,9 +14,26 @@ function aptInstall() {
         checkInstall $APP
         if [ "$?" -eq 0 ]
         then
-            echo -e "${GREEN}\r[+] $APP is already installed!\r${ENDCOLOR}" 
+            echo -e "${GREEN}\r[+] $APP is already installed!\r${ENDCOLOR}"
+            return 1
         else
             sudo apt install $APP
+            return 0
+        fi
+    done
+}
+
+function gemInstall() {
+    for APP in $@
+    do
+        checkInstall $APP
+        if [ "$?" -eq 0 ]
+        then
+            echo -e "${GREEN}\r[+] $APP is already installed!\r${ENDCOLOR}"
+            return 1
+        else
+            sudo gem install $APP
+            return 0
         fi
     done
 }
@@ -48,7 +65,7 @@ sudo apt update
 ## Metasploit Exploit-DB Init:
 systemctl start postgresql && msfdb init
 
-## APT Programs:
+## APT/GEM Programs:
 # Core:
 aptInstall gcc-mingw-w64                    # mingw GCC
 aptInstall golang                           # Install Golang
@@ -77,14 +94,21 @@ aptInstall ghidra                           # NSA Reverse Engineering Tool
 aptInstall ltrace                           # Library call tracer
 # AD/Win Tools
 aptInstall Bloodhound                       # AD/Azure enumerator
-sudo gem install evil-winrm                 # Windows hacking shell
+gemInstall evil-rm                          # Windows hacking shell              
+
 # VSCode:
-aptInstall software-properties-common apt-transport-https
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
-sudo apt update
-aptInstall code
+checkInstall code
+if [ "$?" -eq 0 ]
+then
+    echo -e "${GREEN}\r[+] VSCode is already installed!\r${ENDCOLOR}"
+else
+    aptInstall software-properties-common apt-transport-https
+    curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+    sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
+    echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
+    sudo apt update
+    aptInstall code
+fi
 
 ## GIT Programs:
 cd ~/Desktop && gitFolderCreate Recon&EnumTools
@@ -136,7 +160,3 @@ pip3 install pyftplib               # Python FTP library
 
 # Kali Repository Update:
 sudo apt upgrade
-
-# To Add(?):
-    # pip paramiko
-    # Evil-WinRM     sudo gem install evil-winrm
