@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.2
+# AutoKali v 1.0.3
 
 check=0
 ARGS=$@
@@ -20,10 +20,10 @@ function aptInstall() {
         checkInstall $APP
         if [ "$?" -eq 0 ]
         then
-            echo -e "${CYAN}\r[+] $APP is already installed!\r${ENDCOLOR}"
+            echo -e "${CYAN}\r\n[+] $APP is already installed!\r\n${ENDCOLOR}"
             return 1
         else
-            echo -e "${GREEN}\r[+] Installing $APP!\r${ENDCOLOR}"
+            echo -e "${GREEN}\r\n[+] Installing $APP!\r\n${ENDCOLOR}"
             sudo apt install $APP
             return 0
         fi
@@ -36,10 +36,10 @@ function gemInstall() {
         checkInstall $APP
         if [ "$?" -eq 0 ]
         then
-            echo -e "${CYAN}\r[*] $APP is already installed!\r${ENDCOLOR}"
+            echo -e "${CYAN}\r\n[*] $APP is already installed!\n\r${ENDCOLOR}"
             return 1
         else
-            echo -e "${GREEN}\r[+] Installing $APP!\r${ENDCOLOR}"
+            echo -e "${GREEN}\r\n[+] Installing $APP!\n\r${ENDCOLOR}"
             sudo gem install $APP
             return 0
         fi
@@ -50,7 +50,7 @@ function gitFolderCreate() {
     ls | grep $1 > /dev/null 2>&1
     if [ "$?" -eq 0 ]
     then
-        echo -e "${GREEN}\rFolder $1 already exists!!\r${ENDCOLOR}"
+        echo -e "${GREEN}\r\n[*] Folder $1 already exists!!\n\r${ENDCOLOR}"
     else
         mkdir $1
     fi
@@ -63,7 +63,7 @@ function gitInstall() {
     then
         echo $RESULT
     else
-        echo -e "${GREEN}\rGit program from $1 is already installed!\r${ENDCOLOR}"
+        echo -e "${GREEN}\r\n[*] Git program from $1 is already installed!\n\r${ENDCOLOR}"
     fi
 }
 
@@ -115,7 +115,7 @@ function programsAptGem() { ## APT/GEM Programs:
     checkInstall code
     if [ "$?" -eq 0 ]
     then
-        echo -e "${GREEN}\r[+] VSCode is already installed!\r${ENDCOLOR}"
+        echo -e "${GREEN}\r\n[*] VSCode is already installed!\n\r${ENDCOLOR}"
     else
         aptInstall software-properties-common apt-transport-https
         curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
@@ -199,7 +199,7 @@ Options:
 -a, --apt           Install Apt and Gem Programs
 -g, --git           Install Git Programs and Scripts
 -m, --meta          Perform Metasploit Exploit-DB Setup
--py, --pip          Install Python Pip Packages"
+-p, --pip          Install Python Pip Packages"
     exit 1
 }
 
@@ -222,20 +222,20 @@ function main() {
 [y/N] to continue, or lauch AutoKali with [-h/--help] to see more options: " choice
         if [[ $choice == "y" ]] || [[ $choice == "Y" ]];
         then
-            echo -e "${GREEN}\r[*] Installing all programs!\r${ENDCOLOR}"
+            echo -e "${GREEN}\r\n[*] Installing all programs!\n\r${ENDCOLOR}"
             kaliSync
             programsAptGem
             programsGit
             metasploitInit
             pipInstall
         else
-            echo -e "${RED}Exiting AutoKali\r${ENDCOLOR}"
+            echo -e "${RED}\r\nExiting AutoKali\n\r${ENDCOLOR}"
             exit 0
         fi
     else
         for ARG in $@
         do
-            if [[ $ARG != "-a" ]] && [[ $ARG != "--apt" ]] && [[ $ARG != "-g" ]] && [[ $ARG != "--git" ]] && [[ $ARG != "-m" ]] && [[ $ARG != "--meta" ]] && [[ $ARG != "-py" ]] && [[ $ARG != "--pip" ]];
+            if [[ $ARG != "-a" ]] && [[ $ARG != "--apt" ]] && [[ $ARG != "-g" ]] && [[ $ARG != "--git" ]] && [[ $ARG != "-m" ]] && [[ $ARG != "--meta" ]] && [[ $ARG != "-p" ]] && [[ $ARG != "--pip" ]];
             then
                 help
             fi
@@ -245,19 +245,19 @@ function main() {
         do
             if [[ $ARG == "-a" ]] || [[ $ARG == "--apt" ]];
             then
-                echo -e "${GREEN}\r[*] Installing Apt and Gem Programs!\r${ENDCOLOR}"
+                echo -e "${GREEN}\r\n[*] Installing Apt and Gem Programs!\n\r${ENDCOLOR}"
                 programsAptGem
             elif [[ $ARG == "-g" ]] || [[ $ARG == "--git" ]];
             then
-                echo -e "${GREEN}\r[*] Installing Git Programs and Scripts!\r${ENDCOLOR}"
+                echo -e "${GREEN}\r\n[*] Installing Git Programs and Scripts!\n\r${ENDCOLOR}"
                 programsGit
             elif [[ $ARG == "-m" ]] || [[ $ARG == "--meta" ]];
             then
-                echo -e "${GREEN}\r[*] Performing Metasploit Exploit-DB Setup!\r${ENDCOLOR}"
+                echo -e "${GREEN}\r\n[*] Performing Metasploit Exploit-DB Setup!\n\r${ENDCOLOR}"
                 metasploitInit
             elif [[ $ARG == "-p" ]] || [[ $ARG == "--pip" ]];
             then
-                echo "${GREEN}\r[*] Installing Python Pip Packages!\r${ENDCOLOR}"
+                echo -e "${GREEN}\r\n[*] Installing Python Pip Packages!\n\r${ENDCOLOR}"
                 pipInstall
             fi
         done  
