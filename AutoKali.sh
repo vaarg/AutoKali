@@ -1,6 +1,7 @@
 #!/bin/bash
 
 GREEN="\e[32m"
+RED="\e[31m"
 ENDCOLOR="\e[0m"
 
 function checkInstall() {
@@ -49,9 +50,19 @@ systemctl start postgresql && msfdb init
 
 ## APT Programs:
 # Core:
+aptInstall gcc-mingw-w64                    # mingw GCC
+aptInstall golang                           # Install Golang
+if [ "$?" -eq 0 ]
+then
+    export GOROOT=/usr/lib/go
+    export GOPATH=$HOME/go
+    export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+    source .bashrc
+else
+    echo -e "${RED}\rFailed to install Golang!\r${ENDCOLOR}"
+fi
 aptInstall python2 python-pip               # Py2 PIP
 aptInstall python3 python3-pip              # Py3 PIP
-aptInstall gcc-mingw-w64                    # mingw GCC
 # Recon:
 aptInstall amass                            # OWASP Domain surface mapper
 aptInstall gobuster                         # Directory/Subdom enumerator
@@ -64,9 +75,9 @@ aptInstall pst-utils                        # Outlook pst viewer & utils
 # Reverse Engineering and Tracing:
 aptInstall ghidra                           # NSA Reverse Engineering Tool
 aptInstall ltrace                           # Library call tracer
-# AD Tools
+# AD/Win Tools
 aptInstall Bloodhound                       # AD/Azure enumerator
-aptInstall crackmapexec                     # AD/Windows exploiter
+sudo gem install evil-winrm                 # Windows hacking shell
 # VSCode:
 aptInstall software-properties-common apt-transport-https
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
@@ -76,14 +87,14 @@ sudo apt update
 aptInstall code
 
 ## GIT Programs:
-cd ~ && gitFolderCreate Recon&EnumTools
+cd ~/Desktop && gitFolderCreate Recon&EnumTools
 
 # PortEnum:
 gitFolderCreate PortEnum
 gitInstall https://github.com/vaarg/Gatherum
 
 # LinuxEnum:
-cd ~/Recon&EnumTools && gitFolderCreate LinuxEnum
+cd ~/Desktop/Recon&EnumTools && gitFolderCreate LinuxEnum
 curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh > linpeas.sh
 gitInstall https://github.com/rebootuser/LinEnum
 gitInstall https://github.com/mzet-/linux-exploit-suggester
@@ -91,7 +102,7 @@ gitInstall https://github.com/linted/linuxprivchecker
 gitInstall https://github.com/diego-treitos/linux-smart-enumeration
 
 # WinEnum:
-cd ~/Recon&EnumTools && gitFolderCreate WinEnum
+cd ~/Desktop/Recon&EnumTools && gitFolderCreate WinEnum
 curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/winPEASx64.exe > winPEASx64.exe
 curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/winPEASx86.exe > winPEASx86.exe
 gitInstall https://github.com/PowerShellMafia/PowerSploit #PowerUp.ps1 (WinEnum) and PowerView.ps1 (for AD)
@@ -104,14 +115,14 @@ gitInstall https://github.com/rasta-mouse/Sherlock
 gitInstall https://github.com/411Hall/JAWS
 
 # ActiveDirectory
-cd ~/Recon&EnumTools && gitFolderCreate ActiveDirectory
+cd ~/Desktop/Recon&EnumTools && gitFolderCreate ActiveDirectory
 curl -L https://github.com/ropnop/kerbrute/releases/kerbrute_windows_386.exe > kerbrute_windows_386.exe
 curl -L https://github.com/ropnop/kerbrute/releases/kerbrute_windows_amd64.exe > kerbrute_windows_amd64.exe
 gitInstall https://github.com/BloodHoundAD/BloodHound
 gitInstall https://github.com/GhostPack/Rubeus
 
 # Recon & Info Gathering:
-cd ~/Recon&EnumTools && gitFolderCreate Recon
+cd ~/Desktop/Recon&EnumTools && gitFolderCreate Recon
 gitInstall https://github.com/hmaverickadams/breach-parse
 gitInstall https://github.com/tomnomnom/httprobe
 gitInstall https://github.com/tomnomnom/assetfinder
@@ -120,7 +131,12 @@ gitInstall https://github.com/Gr1mmie/sumrecon
 curl -L https://raw.githubusercontent.com/TCM-Course-Resources/Practical-Ethical-Hacking-Resources/master/bash/webrecon.sh > webrecon.sh
 
 # PIP Packages:
-pip install pycryptodomex
+pip3 install pycryptodomex          # Python Encryption library
+pip3 install pyftplib               # Python FTP library
 
 # Kali Repository Update:
 sudo apt upgrade
+
+# To Add(?):
+    # pip paramiko
+    # Evil-WinRM     sudo gem install evil-winrm
