@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.3
+# AutoKali v 1.0.4
 
 check=0
 ARGS=$@
@@ -88,8 +88,8 @@ function programsAptGem() { ## APT/GEM Programs:
         return 1
     fi
     aptInstall python2
-    aptInstall python-pip                       # Py2 PIP
-    aptInstall python3-pip                      # Py3 PIP
+    aptInstall python-pip                       # Py2 Pip
+    aptInstall python3-pip                      # Py3 Pip
 
     # Recon:
     aptInstall amass                            # OWASP Domain surface mapper
@@ -108,8 +108,8 @@ function programsAptGem() { ## APT/GEM Programs:
     aptInstall ltrace                           # Library call tracer
 
     # AD/Win Tools
-    aptInstall Bloodhound                       # AD/Azure enumerator
-    gemInstall evil-rm                          # Windows hacking shell              
+    aptInstall bloodhound                       # AD/Azure enumerator
+    gemInstall evil-winrm                       # Windows hacking shell              
 
     # VSCode:
     checkInstall code
@@ -159,7 +159,7 @@ function programsGit() { ## GIT Programs:
     cd ~/Desktop/ReconAndEnumTools && gitFolderCreate ActiveDirectory
     curl -L https://github.com/ropnop/kerbrute/releases/kerbrute_windows_386.exe > kerbrute_windows_386.exe
     curl -L https://github.com/ropnop/kerbrute/releases/kerbrute_windows_amd64.exe > kerbrute_windows_amd64.exe
-    gitInstall https://github.com/BloodHoundAD/BloodHound
+    # gitInstall https://github.com/BloodHoundAD/BloodHound
     gitInstall https://github.com/GhostPack/Rubeus
 
     # Recon & Info Gathering:
@@ -174,7 +174,7 @@ function programsGit() { ## GIT Programs:
 
 function metasploitInit() { ## Metasploit Exploit-DB Init:
     sudo systemctl start postgresql && sudo msfdb init
-    sudo update-rc.d postgresql enable && sudo service metasploit restart
+    sudo update-rc.d postgresql enable && sudo service metasploit start && sudo service metasploit restart
 }
 
 function pipInstall() { ## PIP Packages:
@@ -265,6 +265,6 @@ function main() {
 }
 
 main
-sudo apt upgrade # Kali Repository Update
+sudo apt upgrade # Kali System Upgrade
 
 exit 0
