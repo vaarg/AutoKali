@@ -95,7 +95,6 @@ aptInstall ltrace                           # Library call tracer
 # AD/Win Tools
 aptInstall Bloodhound                       # AD/Azure enumerator
 gemInstall evil-rm                          # Windows hacking shell              
-
 # VSCode:
 checkInstall code
 if [ "$?" -eq 0 ]
