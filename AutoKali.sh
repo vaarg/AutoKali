@@ -77,9 +77,11 @@ aptInstall code
 
 ## GIT Programs:
 cd ~ && gitFolderCreate Recon&EnumTools
+
 # PortEnum:
 gitFolderCreate PortEnum
 gitInstall https://github.com/vaarg/Gatherum
+
 # LinuxEnum:
 cd ~/Recon&EnumTools && gitFolderCreate LinuxEnum
 curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh > linpeas.sh
@@ -87,6 +89,7 @@ gitInstall https://github.com/rebootuser/LinEnum
 gitInstall https://github.com/mzet-/linux-exploit-suggester
 gitInstall https://github.com/linted/linuxprivchecker
 gitInstall https://github.com/diego-treitos/linux-smart-enumeration
+
 # WinEnum:
 cd ~/Recon&EnumTools && gitFolderCreate WinEnum
 curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/winPEASx64.exe > winPEASx64.exe
@@ -99,12 +102,14 @@ gitInstall https://github.com/rasta-mouse/Watson
 gitInstall https://github.com/GhostPack/SharpUp
 gitInstall https://github.com/rasta-mouse/Sherlock
 gitInstall https://github.com/411Hall/JAWS
+
 # ActiveDirectory
 cd ~/Recon&EnumTools && gitFolderCreate ActiveDirectory
 curl -L https://github.com/ropnop/kerbrute/releases/kerbrute_windows_386.exe > kerbrute_windows_386.exe
 curl -L https://github.com/ropnop/kerbrute/releases/kerbrute_windows_amd64.exe > kerbrute_windows_amd64.exe
 gitInstall https://github.com/BloodHoundAD/BloodHound
 gitInstall https://github.com/GhostPack/Rubeus
+
 # Recon & Info Gathering:
 cd ~/Recon&EnumTools && gitFolderCreate Recon
 gitInstall https://github.com/hmaverickadams/breach-parse
