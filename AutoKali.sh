@@ -70,7 +70,7 @@ function programsAptGem() { ## APT/GEM Programs:
         export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
         source .bashrc
     else
-        echo -e "${RED}\rFailed to install Golang!\r${ENDCOLOR}"
+        return 1
     fi
     aptInstall python2 python-pip               # Py2 PIP
     aptInstall python3 python3-pip              # Py3 PIP
