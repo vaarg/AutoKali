@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0
+# AutoKali v 1.0.2
 
 check=0
 ARGS=$@
@@ -80,7 +80,7 @@ function programsAptGem() { ## APT/GEM Programs:
     else
         return 1
     fi
-    aptInstall libwacom-common                  # Required library that breaks apt upgrade if not installed
+    aptInstall libwacom-common                  # Required Kali library that breaks apt upgrade if not installed
     if [ "$?" -eq 0 ]
     then
         kaliSync
@@ -88,8 +88,8 @@ function programsAptGem() { ## APT/GEM Programs:
         return 1
     fi
     aptInstall python2
-    aptInstall python-pip               # Py2 PIP
-    aptInstall python3-pip              # Py3 PIP
+    aptInstall python-pip                       # Py2 PIP
+    aptInstall python3-pip                      # Py3 PIP
 
     # Recon:
     aptInstall amass                            # OWASP Domain surface mapper
@@ -196,7 +196,7 @@ function help() {
 AutoKali installs useful programs and scripts for recon, enumeration and exploitation.
 Options:
 -h, --help          Display this usage message and exit
--p, --progs         Install Apt and Gem Programs
+-a, --apt           Install Apt and Gem Programs
 -g, --git           Install Git Programs and Scripts
 -m, --meta          Perform Metasploit Exploit-DB Setup
 -py, --pip          Install Python Pip Packages"
@@ -219,7 +219,7 @@ function main() {
     [*] Install Git Programs and Scripts
     [*] Perform Metasploit Exploit-DB Setup
     [*] Install Python Pip Packages
-[y/N] to continue, or lauch AutoKali with [-h/--help] to see options: " choice
+[y/N] to continue, or lauch AutoKali with [-h/--help] to see more options: " choice
         if [[ $choice == "y" ]] || [[ $choice == "Y" ]];
         then
             echo -e "${GREEN}\r[*] Installing all programs!\r${ENDCOLOR}"
@@ -235,16 +235,15 @@ function main() {
     else
         for ARG in $@
         do
-            if [[ $ARG != "-p" ]] && [[ $ARG != "--progs" ]] && [[ $ARG != "-g" ]] && [[ $ARG != "--git" ]] && [[ $ARG != "-m" ]] && [[ $ARG != "--meta" ]] && [[ $ARG != "-py" ]] && [[ $ARG != "--pip" ]];
+            if [[ $ARG != "-a" ]] && [[ $ARG != "--apt" ]] && [[ $ARG != "-g" ]] && [[ $ARG != "--git" ]] && [[ $ARG != "-m" ]] && [[ $ARG != "--meta" ]] && [[ $ARG != "-py" ]] && [[ $ARG != "--pip" ]];
             then
-                # echo $ARG
                 help
             fi
         done
         kaliSync
         for ARG in $@
         do
-            if [[ $ARG == "-p" ]] || [[ $ARG == "--progs" ]];
+            if [[ $ARG == "-a" ]] || [[ $ARG == "--apt" ]];
             then
                 echo -e "${GREEN}\r[*] Installing Apt and Gem Programs!\r${ENDCOLOR}"
                 programsAptGem
@@ -256,7 +255,7 @@ function main() {
             then
                 echo -e "${GREEN}\r[*] Performing Metasploit Exploit-DB Setup!\r${ENDCOLOR}"
                 metasploitInit
-            elif [[ $ARG == "-py" ]] || [[ $ARG == "--pip" ]];
+            elif [[ $ARG == "-p" ]] || [[ $ARG == "--pip" ]];
             then
                 echo "${GREEN}\r[*] Installing Python Pip Packages!\r${ENDCOLOR}"
                 pipInstall
@@ -266,8 +265,6 @@ function main() {
 }
 
 main
-
-# Kali Repository Update:
-sudo apt upgrade
+sudo apt upgrade # Kali Repository Update
 
 exit 0
