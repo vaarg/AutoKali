@@ -174,6 +174,7 @@ function pipInstall() { ## PIP Packages:
         aptInstall python3 python3-pip              # Py3 PIP
         check=1
         pipInstall
+    fi
 }
 
 ## Kali Repository Sync:
