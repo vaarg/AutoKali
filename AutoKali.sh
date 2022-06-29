@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.10
+# AutoKali v 1.0.11
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -78,18 +78,18 @@ function gitInstall() {
     fi
 }
 
-function pipInstall() {
-    checkInstall $1
-    if [ $? -eq 0 ]
-    then
-        echo -e "${CYAN}\r\n[*] $1 is already installed!\n\r${ENDCOLOR}"
-        return 1
-    else
-        echo -e "${GREEN}\r\n[+] Installing $1!\r\n${ENDCOLOR}"
-        sudo apt install $2
-        return 0
-    fi
-}
+# function pipInstall() {
+#     checkInstall $1
+#     if [ $? -eq 0 ]
+#     then
+#         echo -e "${CYAN}\r\n[*] $1 is already installed!\n\r${ENDCOLOR}"
+#         return 1
+#     else
+#         echo -e "${GREEN}\r\n[+] Installing $1!\r\n${ENDCOLOR}"
+#         sudo apt install $2
+#         return 0
+#     fi
+# }
 
 function programsCore() { ## APT/GEM Programs:
     # Core:
@@ -112,6 +112,14 @@ function programsCore() { ## APT/GEM Programs:
         return 1
     fi
     aptInstall python2
+    # if [ "$?" -eq 0 ]
+    # then
+    #     return 0
+    # else
+    #     return 1
+    # fi 
+    # pipInstall pip2 python-pip                  # Py2 Pip
+    # pipInstall pip3 python3-pip                 # Py3 Pip
     aptInstall python-pip                       # Py2 Pip
     aptInstall python3-pip                      # Py3 Pip
 
@@ -211,6 +219,8 @@ function pipInstall() { ## PIP Packages:
         pip3 install pyftplib               # Python FTP library
     else
         aptInstall python2 
+        # pipInstall pip2 python-pip                  # Py2 Pip
+        # pipInstall pip3 python3-pip                 # Py3 Pip
         aptInstall python-pip               # Py2 PIP
         aptInstall python3-pip              # Py3 PIP
         check=1
@@ -235,61 +245,61 @@ function kaliSync() {
     sudo apt update    
 }
 
-function main() {
-    if [[ $1 == "-h" ]] || [[ $1 == "--help" ]];
-    then
-        help
-    elif [ $# == 0 ]
-    then
-        read -p "AutoKali will perform the following:
-    [*] Install Apt and Gem Programs
-    [*] Install Git Programs and Scripts
-    [*] Perform Metasploit Exploit-DB Setup
-    [*] Install Python Pip Packages
+# Main:
+
+if [[ $1 == "-h" ]] || [[ $1 == "--help" ]];
+then
+    help
+elif [ $# == 0 ]
+then
+    read -p "AutoKali will perform the following:
+[*] Install Apt and Gem Programs
+[*] Install Git Programs and Scripts
+[*] Perform Metasploit Exploit-DB Setup
+[*] Install Python Pip Packages
 [y/N] to continue, or lauch AutoKali with [-h/--help] to see more options: " choice
-        if [[ $choice == "y" ]] || [[ $choice == "Y" ]];
-        then
-            echo -e "${GREEN}\r\n[*] Installing all programs!\n\r${ENDCOLOR}"
-            kaliSync
-            programsCore
-            programsGit
-            metasploitInit
-            pipInstall
-        else
-            echo -e "${RED}\r\nExiting AutoKali\n\r${ENDCOLOR}"
-            exit 0
-        fi
-    else
-        for ARG in $@
-        do
-            if [[ $ARG != "-c" ]] && [[ $ARG != "--core" ]] && [[ $ARG != "-g" ]] && [[ $ARG != "--git" ]] && [[ $ARG != "-m" ]] && [[ $ARG != "--meta" ]] && [[ $ARG != "-p" ]] && [[ $ARG != "--pip" ]];
-            then
-                help
-            fi
-        done
+    if [[ $choice == "y" ]] || [[ $choice == "Y" ]];
+    then
+        echo -e "${GREEN}\r\n[*] Installing all programs!\n\r${ENDCOLOR}"
         kaliSync
-        for ARG in $@
-        do
-            if [[ $ARG == "-c" ]] || [[ $ARG == "--core" ]];
-            then
-                echo -e "${GREEN}\r\n[*] Installing Apt and Gem Programs!\n\r${ENDCOLOR}"
-                programsCore
-            elif [[ $ARG == "-g" ]] || [[ $ARG == "--git" ]];
-            then
-                echo -e "${GREEN}\r\n[*] Installing Git Programs and Scripts!\n\r${ENDCOLOR}"
-                programsGit
-            elif [[ $ARG == "-m" ]] || [[ $ARG == "--meta" ]];
-            then
-                echo -e "${GREEN}\r\n[*] Performing Metasploit Exploit-DB Setup!\n\r${ENDCOLOR}"
-                metasploitInit
-            elif [[ $ARG == "-p" ]] || [[ $ARG == "--pip" ]];
-            then
-                echo -e "${GREEN}\r\n[*] Installing Python Pip Packages!\n\r${ENDCOLOR}"
-                pipInstall
-            fi
-        done  
+        programsCore
+        programsGit
+        metasploitInit
+        pipInstall
+    else
+        echo -e "${RED}\r\nExiting AutoKali\n\r${ENDCOLOR}"
+        exit 0
     fi
-}
+else
+    for ARG in $@
+    do
+        if [[ $ARG != "-c" ]] && [[ $ARG != "--core" ]] && [[ $ARG != "-g" ]] && [[ $ARG != "--git" ]] && [[ $ARG != "-m" ]] && [[ $ARG != "--meta" ]] && [[ $ARG != "-p" ]] && [[ $ARG != "--pip" ]];
+        then
+            help
+        fi
+    done
+    kaliSync
+    for ARG in $@
+    do
+        if [[ $ARG == "-c" ]] || [[ $ARG == "--core" ]];
+        then
+            echo -e "${GREEN}\r\n[*] Installing Apt and Gem Programs!\n\r${ENDCOLOR}"
+            programsCore
+        elif [[ $ARG == "-g" ]] || [[ $ARG == "--git" ]];
+        then
+            echo -e "${GREEN}\r\n[*] Installing Git Programs and Scripts!\n\r${ENDCOLOR}"
+            programsGit
+        elif [[ $ARG == "-m" ]] || [[ $ARG == "--meta" ]];
+        then
+            echo -e "${GREEN}\r\n[*] Performing Metasploit Exploit-DB Setup!\n\r${ENDCOLOR}"
+            metasploitInit
+        elif [[ $ARG == "-p" ]] || [[ $ARG == "--pip" ]];
+        then
+            echo -e "${GREEN}\r\n[*] Installing Python Pip Packages!\n\r${ENDCOLOR}"
+            pipInstall
+        fi
+    done  
+fi
 
 main
 sudo apt upgrade # Kali System Upgrade
