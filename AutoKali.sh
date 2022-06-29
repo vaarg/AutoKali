@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.12
+# AutoKali v 1.0.13
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -78,18 +78,18 @@ function gitInstall() {
     fi
 }
 
-# function pipInstall() {
-#     checkInstall $1
-#     if [ $? -eq 0 ]
-#     then
-#         echo -e "${CYAN}\r\n[*] $1 is already installed!\n\r${ENDCOLOR}"
-#         return 1
-#     else
-#         echo -e "${GREEN}\r\n[+] Installing $1!\r\n${ENDCOLOR}"
-#         sudo apt install $2
-#         return 0
-#     fi
-# }
+function pipInstall() {
+    checkInstall $1
+    if [ $? -eq 0 ]
+    then
+        echo -e "${CYAN}\r\n[*] $1 is already installed!\n\r${ENDCOLOR}"
+        return 1
+    else
+        echo -e "${GREEN}\r\n[+] Installing $1!\r\n${ENDCOLOR}"
+        sudo apt install $2
+        return 0
+    fi
+}
 
 function programsCore() { ## APT/GEM Programs:
     # Core:
@@ -112,16 +112,8 @@ function programsCore() { ## APT/GEM Programs:
         return 1
     fi
     aptInstall python2
-    # if [ "$?" -eq 0 ]
-    # then
-    #     return 0
-    # else
-    #     return 1
-    # fi 
-    # pipInstall pip2 python-pip                  # Py2 Pip
-    # pipInstall pip3 python3-pip                 # Py3 Pip
-    aptInstall python-pip                       # Py2 Pip
-    aptInstall python3-pip                      # Py3 Pip
+    pipInstall pip2 python-pip                  # Py2 Pip
+    pipInstall pip3 python3-pip                 # Py3 Pip
 
     # Recon:
     aptInstall amass                            # OWASP Domain surface mapper
@@ -212,17 +204,15 @@ function metasploitInit() { ## Metasploit Exploit-DB Init:
     # sudo update-rc.d postgresql enable && sudo service metasploit start && sudo service metasploit restart
 }
 
-function pipInstall() { ## PIP Packages:
+function pipLib() { ## PIP Packages:
     if [ $check == 1 ]
     then
         pip3 install pycryptodomex          # Python Encryption library
         pip3 install pyftplib               # Python FTP library
     else
         aptInstall python2 
-        # pipInstall pip2 python-pip                  # Py2 Pip
-        # pipInstall pip3 python3-pip                 # Py3 Pip
-        aptInstall python-pip               # Py2 PIP
-        aptInstall python3-pip              # Py3 PIP
+        pipInstall pip2 python-pip                  # Py2 Pip
+        pipInstall pip3 python3-pip                 # Py3 Pip
         check=1
         pipInstall
     fi
@@ -265,7 +255,7 @@ function main() {
             programsCore
             programsGit
             metasploitInit
-            pipInstall
+            pipLib
         else
             echo -e "${RED}\r\nExiting AutoKali\n\r${ENDCOLOR}"
             exit 0
@@ -296,7 +286,7 @@ function main() {
             elif [[ $ARG == "-p" ]] || [[ $ARG == "--pip" ]];
             then
                 echo -e "${GREEN}\r\n[*] Installing Python Pip Packages!\n\r${ENDCOLOR}"
-                pipInstall
+                pipLib
             fi
         done  
     fi
