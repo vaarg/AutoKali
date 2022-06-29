@@ -28,8 +28,6 @@ Basically AutoKali:
 - Installs VSCode.
 - Does a general Kali system update and upgrade.
 
-# What AutoKali Does:
-
 ## Core Installations (--core/-c):
 
 **Kali Installations**:
@@ -51,6 +49,7 @@ Basically AutoKali:
 | LTrace | Library Call Tracer | Reverse Engineering/Tracing |
 | BloodHound | Active Directory Enumerator/Visualiser | AD/Win Tools |
 | Evil-WinRM | Windows Hacking Shell | AD/Win Tools |
+| Visual Studio Code | Source Code Editor/IDE | AD/Win Tools |
 | [To add...!] | [To add...!] | [To add...!] |
 
 ## Git Scripts/Programs (--git/-g):
