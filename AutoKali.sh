@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# AutoKali v 1.0.8
+# AutoKali v 1.0.9
 # Author: https://github.com/vaarg/
 
 # Usage:
     # ./AutoKali.sh (for all changes, y/N prompt to confirm)
-    # ./AutoKali.sh --core/-c    Install only Apt and Gem programs
-    # ./AutoKali.sh --git/-g    Install only Git scripts and programs
-    # ./AutoKali.sh --meta/-m   Perform Metasploit Exploit-DB setup
-    # ./AutoKali.sh --pip/-p    Install Python Pip packages and libraries
+    # ./AutoKali.sh --core, -c    Install only Apt and Gem programs
+    # ./AutoKali.sh --git, -g    Install only Git scripts and programs
+    # ./AutoKali.sh --meta, -m   Perform Metasploit Exploit-DB setup
+    # ./AutoKali.sh --pip, -p    Install Python Pip packages and libraries
 # Description:
     # AutoKali automatically installs useful programs and scripts for recon, enumeration and exploitation for Kali Linux 
     # that aren't included by default, as well as essential programs for any Kali user.   
@@ -117,6 +117,7 @@ function programsCore() { ## APT/GEM Programs:
 
     # Recon:
     aptInstall amass                            # OWASP Domain surface mapper
+    aptInstall assetfinder
     aptInstall gobuster                         # Directory/Subdom enumerator
 
     # Web Enum:
@@ -134,7 +135,7 @@ function programsCore() { ## APT/GEM Programs:
     # AD/Win Tools
     aptInstall bloodhound                       # AD/Azure enumerator
     gemInstall evil-winrm                       # Windows hacking shell
-    sudo pip3 install Mitm6                      # Windows mitm pentesting tool              
+    sudo pip3 install Mitm6                     # Windows mitm pentesting tool              
 
     # VSCode:
     checkInstall code
@@ -191,7 +192,7 @@ function programsGit() { ## GIT Scripts & Programs:
     cd ~/Desktop/ReconAndEnumTools && gitFolderCreate Recon
     gitInstall https://github.com/hmaverickadams/breach-parse
     gitInstall https://github.com/tomnomnom/httprobe
-    gitInstall https://github.com/tomnomnom/assetfinder # Sudo apt install assetfinder?
+    # gitInstall https://github.com/tomnomnom/assetfinder # Sudo apt install assetfinder?
     gitInstall https://github.com/sensepost/gowitness
     gitInstall https://github.com/Gr1mmie/sumrecon
     curl -L https://raw.githubusercontent.com/TCM-Course-Resources/Practical-Ethical-Hacking-Resources/master/bash/webrecon.sh > webrecon.sh
