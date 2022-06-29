@@ -8,14 +8,14 @@ Install everything (with y/N check before proceeding):
     
 Specific installations and changes:
 
-    ./AutoKali.sh --apt         (or [-a])    Install only Apt and Gem programs
-    ./AutoKali.sh --git         (or [-g])    Install only Git scripts and programs
-    ./AutoKali.sh --meta        (or [-m])    Perform Metasploit Exploit-DB setup
-    ./AutoKali.sh --pip         (or [-p])    Install Python Pip packages and libraries
+    ./AutoKali.sh --core, -c        Install only Apt and Gem programs
+    ./AutoKali.sh --git, -g         Install only Git scripts and programs
+    ./AutoKali.sh --meta, -m        Perform Metasploit Exploit-DB setup
+    ./AutoKali.sh --pip, -p         Install Python Pip packages and libraries
     
 Usage and Help option:
 
-    ./AutoKali.sh --help        (or [-h])
+    ./AutoKali.sh --help, -h
 
 ## Overview of what AutoKali Is and What It Does:
 I created this script so I (and everyone) could avoid the tedium of having to work through a checklist of necessary changes/modifications needed to make a fresh install of Kali Linux more usable, with the added bonus of adding convenient and popular scripts. That said, AutoKali is very useful on non-fresh installations too, with its abundance of industry-standard programs and scripts.
