@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.15
+# AutoKali v 1.0.16
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -248,19 +248,21 @@ function main() {
     [*] Install Git Programs and Scripts
     [*] Perform Metasploit Exploit-DB Setup
     [*] Install Python Pip Packages
-    [y/N] to continue, or lauch AutoKali with [-h/--help] to see more options: " choice
-        if [[ $choice == "y" ]] || [[ $choice == "Y" ]];
-        then
-            echo -e "${GREEN}\r\n[*] Installing all programs!\n\r${ENDCOLOR}"
-            kaliSync
-            programsCore
-            programsGit
-            metasploitInit
-            pipLib
-        else
-            echo -e "${RED}\r\nExiting AutoKali\n\r${ENDCOLOR}"
-            exit 0
-        fi
+    [y/N] to continue, or lauch AutoKali with [-h/--help] to see more options: " CHOICE
+        case "$CHOICE" in
+            [yY]|[yY][eE][sS])
+                echo -e "${GREEN}\r\n[*] Installing all programs!\n\r${ENDCOLOR}"
+                kaliSync
+                programsCore
+                programsGit
+                metasploitInit
+                pipLib
+                ;;
+            [nN]|[nN][oO]|*)
+                echo -e "${RED}\r\nExiting AutoKali!\r${ENDCOLOR}"
+                exit 0
+                ;;
+        esac   
     else
         for ARG in $@
         do
