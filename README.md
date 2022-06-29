@@ -28,7 +28,7 @@ Basically AutoKali:
 - Installs VSCode.
 - Does a general Kali system update and upgrade.
 
-To a comprehensive list of what AutoKali installs see [InstallationList.md](https://github.com/vaarg/AutoKali/blob/main/InstallationList.md) file.
+To a comprehensive list of what AutoKali installs see [Installations.md](https://github.com/vaarg/AutoKali/blob/main/Installations.md) file.
 
 ## In Future Updates:
 - More essential and useful programs, scripts and libraries.
