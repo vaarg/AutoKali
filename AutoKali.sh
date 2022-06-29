@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.13
+# AutoKali v 1.0.14
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -214,7 +214,7 @@ function pipLib() { ## PIP Packages:
         pipInstall pip2 python-pip                  # Py2 Pip
         pipInstall pip3 python3-pip                 # Py3 Pip
         check=1
-        pipInstall
+        pipLib
     fi
 }
 
