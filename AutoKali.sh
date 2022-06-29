@@ -82,10 +82,10 @@ function pipInstall() {
     checkInstall $1
     if [ $? -eq 0 ]
     then
-        echo -e "${CYAN}\r\n[*] $2 is already installed!\n\r${ENDCOLOR}"
+        echo -e "${CYAN}\r\n[*] $1 is already installed!\n\r${ENDCOLOR}"
         return 1
     else
-        echo -e "${GREEN}\r\n[+] Installing $2!\r\n${ENDCOLOR}"
+        echo -e "${GREEN}\r\n[+] Installing $1!\r\n${ENDCOLOR}"
         sudo apt install $2
         return 0
     fi
