@@ -17,7 +17,7 @@ Usage and Help option:
 
     ./AutoKali.sh --help, -h
 
-## Overview of what AutoKali Is and What It Does:
+## Overview of AutoKali:
 I created this script so I (and everyone) could avoid the tedium of having to work through a checklist of necessary changes/modifications needed to make a fresh install of Kali Linux more usable, with the added bonus of adding convenient and popular scripts. That said, AutoKali is very useful on non-fresh installations too, with its abundance of industry-standard programs and scripts.
 
 Basically AutoKali:
@@ -92,6 +92,15 @@ Basically AutoKali:
 | GoWitness | Chromium Web Screenshotter | https://github.com/sensepost/gowitness |
 | SumRecon | General Site Enumerator | https://github.com/Gr1mmie/sumrecon |
 | WebRecon | General Site Enumerator | https://github.com/TCM-Course-Resources/Practical-Ethical-Hacking-Resources/tree/master/bash |
+
+## PIP Packages (--pip/-p):
+
+| Name | Description | 
+| --------------- | --------------- | 
+| PyCryptoDomex | Python Encryption Library |
+| PyFTPLib | Python FTP library |
+| Mitm6 | Windows/Active Directory Pentesting Tool |
+| [To add...!] | [To add...!] |
 
 ## In Future Updates:
 - A breakdown of *what is actually installed* by this script and links to source GitHubs.
