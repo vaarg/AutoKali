@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# AutoKali v 1.0.6
+# AutoKali v 1.0.7
 # Author: https://github.com/vaarg/
 
 # Usage:
     # ./AutoKali.sh (for all changes, y/N prompt to confirm)
-    # ./AutoKali.sh --apt/-a    Install only Apt and Gem programs
+    # ./AutoKali.sh --core/-c    Install only Apt and Gem programs
     # ./AutoKali.sh --git/-g    Install only Git scripts and programs
     # ./AutoKali.sh --meta/-m   Perform Metasploit Exploit-DB setup
     # ./AutoKali.sh --pip/-p    Install Python Pip packages and libraries
@@ -78,7 +78,20 @@ function gitInstall() {
     fi
 }
 
-function programsAptGem() { ## APT/GEM Programs:
+function pipInstall() {
+    checkInstall $1
+    if [ $? -eq 0 ]
+    then
+        echo -e "${CYAN}\r\n[*] $2 is already installed!\n\r${ENDCOLOR}"
+        return 1
+    else
+        echo -e "${GREEN}\r\n[+] Installing $2!\r\n${ENDCOLOR}"
+        sudo apt install $2
+        return 0
+    fi
+}
+
+function programsCore() { ## APT/GEM Programs:
     # Core:
     aptInstall gcc-mingw-w64                    # mingw GCC
     aptInstall golang                           # Install Golang
@@ -99,8 +112,8 @@ function programsAptGem() { ## APT/GEM Programs:
         return 1
     fi
     aptInstall python2
-    aptInstall python-pip                       # Py2 Pip
-    aptInstall python3-pip                      # Py3 Pip
+    pipInstall pip2 python-pip                  # Py2 Pip
+    pipInstall pip3 python3-pip                 # Py3 Pip
 
     # Recon:
     aptInstall amass                            # OWASP Domain surface mapper
@@ -208,10 +221,10 @@ function help() {
 AutoKali installs useful programs and scripts for recon, enumeration and exploitation.
 Options:
 -h, --help          Display this usage message and exit
--a, --apt           Install Apt and Gem Programs
+-c, --core           Install Apt and Gem Programs
 -g, --git           Install Git Programs and Scripts
 -m, --meta          Perform Metasploit Exploit-DB Setup
--p, --pip          Install Python Pip Packages"
+-p, --pip           Install Python Pip Packages"
     exit 1
 }
 
@@ -236,7 +249,7 @@ function main() {
         then
             echo -e "${GREEN}\r\n[*] Installing all programs!\n\r${ENDCOLOR}"
             kaliSync
-            programsAptGem
+            programsCore
             programsGit
             metasploitInit
             pipInstall
@@ -247,7 +260,7 @@ function main() {
     else
         for ARG in $@
         do
-            if [[ $ARG != "-a" ]] && [[ $ARG != "--apt" ]] && [[ $ARG != "-g" ]] && [[ $ARG != "--git" ]] && [[ $ARG != "-m" ]] && [[ $ARG != "--meta" ]] && [[ $ARG != "-p" ]] && [[ $ARG != "--pip" ]];
+            if [[ $ARG != "-c" ]] && [[ $ARG != "--core" ]] && [[ $ARG != "-g" ]] && [[ $ARG != "--git" ]] && [[ $ARG != "-m" ]] && [[ $ARG != "--meta" ]] && [[ $ARG != "-p" ]] && [[ $ARG != "--pip" ]];
             then
                 help
             fi
@@ -255,10 +268,10 @@ function main() {
         kaliSync
         for ARG in $@
         do
-            if [[ $ARG == "-a" ]] || [[ $ARG == "--apt" ]];
+            if [[ $ARG == "-c" ]] || [[ $ARG == "--core" ]];
             then
                 echo -e "${GREEN}\r\n[*] Installing Apt and Gem Programs!\n\r${ENDCOLOR}"
-                programsAptGem
+                programsCore
             elif [[ $ARG == "-g" ]] || [[ $ARG == "--git" ]];
             then
                 echo -e "${GREEN}\r\n[*] Installing Git Programs and Scripts!\n\r${ENDCOLOR}"
