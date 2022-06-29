@@ -7,7 +7,7 @@
 | GoLang | Go Language | Core |
 | libwacom-common | libwacom-common library | Core |
 | PyPi2 (Pip2) | Python Package Index for Python 2.7 | Core |
-| PyPi3 (Pip2) | Python Package Index for Python 3+ | Core |
+| PyPi3 (Pip3) | Python Package Index for Python 3+ | Core |
 | Amass | OWASP Domain Surface Mapper | Recon/WebEnum |
 | Assetfinder | Domain/Subdomain enumerator | Recon/WebEnum |
 | GoBuster | Directory/Subdom enumerator | Recon/WebEnum |
