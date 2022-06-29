@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.9
+# AutoKali v 1.0.10
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -112,8 +112,8 @@ function programsCore() { ## APT/GEM Programs:
         return 1
     fi
     aptInstall python2
-    pipInstall pip2 python-pip                  # Py2 Pip
-    pipInstall pip3 python3-pip                 # Py3 Pip
+    aptInstall python-pip                       # Py2 Pip
+    aptInstall python3-pip                      # Py3 Pip
 
     # Recon:
     aptInstall amass                            # OWASP Domain surface mapper
@@ -135,7 +135,7 @@ function programsCore() { ## APT/GEM Programs:
     # AD/Win Tools
     aptInstall bloodhound                       # AD/Azure enumerator
     gemInstall evil-winrm                       # Windows hacking shell
-    sudo pip3 install Mitm6                     # Windows mitm pentesting tool              
+    sudo pip3 install mitm6                     # Windows mitm pentesting tool              
 
     # VSCode:
     checkInstall code
@@ -143,7 +143,8 @@ function programsCore() { ## APT/GEM Programs:
     then
         echo -e "${GREEN}\r\n[*] VSCode is already installed!\n\r${ENDCOLOR}"
     else
-        aptInstall software-properties-common apt-transport-https
+        aptInstall software-properties-common 
+        aptInstall apt-transport-https
         curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
         sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
         echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
@@ -210,8 +211,8 @@ function pipInstall() { ## PIP Packages:
         pip3 install pyftplib               # Python FTP library
     else
         aptInstall python2 
-        pipInstall pip2 python-pip                  # Py2 Pip
-        pipInstall pip3 python3-pip                 # Py3 Pip
+        aptInstall python-pip               # Py2 PIP
+        aptInstall python3-pip              # Py3 PIP
         check=1
         pipInstall
     fi
@@ -222,7 +223,7 @@ function help() {
 AutoKali installs useful programs and scripts for recon, enumeration and exploitation.
 Options:
 -h, --help          Display this usage message and exit
--c, --core           Install Apt and Gem Programs
+-c, --core          Install Apt and Gem Programs
 -g, --git           Install Git Programs and Scripts
 -m, --meta          Perform Metasploit Exploit-DB Setup
 -p, --pip           Install Python Pip Packages"
