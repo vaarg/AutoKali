@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.7
+# AutoKali v 1.0.8
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -134,7 +134,7 @@ function programsCore() { ## APT/GEM Programs:
     # AD/Win Tools
     aptInstall bloodhound                       # AD/Azure enumerator
     gemInstall evil-winrm                       # Windows hacking shell
-    sudo pip install Mitm6                      # Windows mitm pentesting tool              
+    sudo pip3 install Mitm6                      # Windows mitm pentesting tool              
 
     # VSCode:
     checkInstall code
@@ -209,8 +209,8 @@ function pipInstall() { ## PIP Packages:
         pip3 install pyftplib               # Python FTP library
     else
         aptInstall python2 
-        aptInstall python-pip               # Py2 PIP
-        aptInstall python3-pip              # Py3 PIP
+        pipInstall pip2 python-pip                  # Py2 Pip
+        pipInstall pip3 python3-pip                 # Py3 Pip
         check=1
         pipInstall
     fi
