@@ -103,7 +103,6 @@ Basically AutoKali:
 | [To add...!] | [To add...!] |
 
 ## In Future Updates:
-- A breakdown of *what is actually installed* by this script and links to source GitHubs.
 - More essential and useful programs, scripts and libraries.
 - General, yet essential instructions; for example, how to configure BurpSuite & Zap proxy.
 - Other recommended programs, such as browser extensions for WebApp analysis.
