@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.16
+# AutoKali v 1.0.17
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -187,6 +187,7 @@ function programsGit() { ## GIT Scripts & Programs:
     cd ~/Desktop/ReconAndEnumTools && gitFolderCreate ActiveDirectory
     curl -L https://github.com/ropnop/kerbrute/releases/kerbrute_windows_386.exe > kerbrute_windows_386.exe
     curl -L https://github.com/ropnop/kerbrute/releases/kerbrute_windows_amd64.exe > kerbrute_windows_amd64.exe
+    curl -L https://github.com/gentilkiwi/mimikatz/releases/latest/download/mimikatz_trunk.zip > mimikatz_trunk.zip
     # gitInstall https://github.com/BloodHoundAD/BloodHound
     gitInstall https://github.com/GhostPack/Rubeus
 
@@ -258,7 +259,7 @@ function main() {
                 metasploitInit
                 pipLib
                 ;;
-            [nN]|[nN][oO]|*)
+            *)
                 echo -e "${RED}\r\nExiting AutoKali!\r${ENDCOLOR}"
                 exit 0
                 ;;
