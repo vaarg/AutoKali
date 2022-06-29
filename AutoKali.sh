@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.14
+# AutoKali v 1.0.15
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -61,8 +61,9 @@ function gitFolderCreate() {
     ls | grep $1 > /dev/null 2>&1
     if [ "$?" -eq 0 ]
     then
-        echo -e "${GREEN}\r\n[*] Folder $1 already exists!!\n\r${ENDCOLOR}"
+        echo -e "${CYAN}\r\n[*] Folder $1 already exists!\n\r${ENDCOLOR}"
     else
+        echo -e "${GREEN}\r\n[+] Creating folder $1 in $PWD!\n\r${ENDCOLOR}"
         mkdir $1
     fi
     cd $1
@@ -72,9 +73,10 @@ function gitInstall() {
     RESULT=$(git clone $1)
     if [ "$?" -eq 0 ]
     then
+        echo -e "${GREEN}\r\n[+] Installing Git script/program from $1!\n\r${ENDCOLOR}"
         echo $RESULT
     else
-        echo -e "${GREEN}\r\n[*] Git program from $1 is already installed!\n\r${ENDCOLOR}"
+        echo -e "${CYAN}\r\n[*] Git script/program from $1 is already installed!\n\r${ENDCOLOR}"
     fi
 }
 
@@ -117,7 +119,7 @@ function programsCore() { ## APT/GEM Programs:
 
     # Recon:
     aptInstall amass                            # OWASP Domain surface mapper
-    aptInstall assetfinder
+    aptInstall assetfinder                      # Domain/Subdomain enumerator
     aptInstall gobuster                         # Directory/Subdom enumerator
 
     # Web Enum:
@@ -134,8 +136,7 @@ function programsCore() { ## APT/GEM Programs:
 
     # AD/Win Tools
     aptInstall bloodhound                       # AD/Azure enumerator
-    gemInstall evil-winrm                       # Windows hacking shell
-    sudo pip3 install mitm6                     # Windows mitm pentesting tool              
+    gemInstall evil-winrm                       # Windows hacking shell           
 
     # VSCode:
     checkInstall code
@@ -173,9 +174,9 @@ function programsGit() { ## GIT Scripts & Programs:
     cd ~/Desktop/ReconAndEnumTools && gitFolderCreate WinEnum
     curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/winPEASx64.exe > winPEASx64.exe
     curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/winPEASx86.exe > winPEASx86.exe
-    gitInstall https://github.com/PowerShellMafia/PowerSploit #PowerUp.ps1 (WinEnum) and PowerView.ps1 (for AD)
-    gitInstall https://github.com/AonCyberLabs/Windows-Exploit-Suggester # Add Py2 dependencies
-    gitInstall https://github.com/bitsadmin/wesng # Py3 version of WinExploitSuggester
+    gitInstall https://github.com/PowerShellMafia/PowerSploit               # PowerUp.ps1 (WinEnum) and PowerView.ps1 (for AD)
+    gitInstall https://github.com/AonCyberLabs/Windows-Exploit-Suggester    # Add Py2 dependencies
+    gitInstall https://github.com/bitsadmin/wesng                           # Py3 version of WinExploitSuggester
     gitInstall https://github.com/GhostPack/Seatbelt
     gitInstall https://github.com/rasta-mouse/Watson
     gitInstall https://github.com/GhostPack/SharpUp
@@ -193,7 +194,7 @@ function programsGit() { ## GIT Scripts & Programs:
     cd ~/Desktop/ReconAndEnumTools && gitFolderCreate Recon
     gitInstall https://github.com/hmaverickadams/breach-parse
     gitInstall https://github.com/tomnomnom/httprobe
-    # gitInstall https://github.com/tomnomnom/assetfinder # Sudo apt install assetfinder?
+    # gitInstall https://github.com/tomnomnom/assetfinder
     gitInstall https://github.com/sensepost/gowitness
     gitInstall https://github.com/Gr1mmie/sumrecon
     curl -L https://raw.githubusercontent.com/TCM-Course-Resources/Practical-Ethical-Hacking-Resources/master/bash/webrecon.sh > webrecon.sh
@@ -209,6 +210,7 @@ function pipLib() { ## PIP Packages:
     then
         pip3 install pycryptodomex          # Python Encryption library
         pip3 install pyftplib               # Python FTP library
+        pip3 install mitm6                  # Windows/AD mitm pentesting tool   
     else
         aptInstall python2 
         pipInstall pip2 python-pip                  # Py2 Pip
@@ -231,8 +233,7 @@ Options:
 }
 
 function kaliSync() {
-    ## Kali Repository Sync:
-    sudo apt update    
+    sudo apt update      ## Kali Repository Sync  
 }
 
 # Main:
@@ -296,6 +297,3 @@ main $@
 sudo apt upgrade # Kali System Upgrade
 
 exit 0
-
-# To:
-# - Nessus
