@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# AutoKali v 1.0.11
+# AutoKali v 1.0.12
 # Author: https://github.com/vaarg/
 
 # Usage:
     # ./AutoKali.sh (for all changes, y/N prompt to confirm)
-    # ./AutoKali.sh --core, -c    Install only Apt and Gem programs
+    # ./AutoKali.sh --core, -c   Install only Apt and Gem programs
     # ./AutoKali.sh --git, -g    Install only Git scripts and programs
     # ./AutoKali.sh --meta, -m   Perform Metasploit Exploit-DB setup
     # ./AutoKali.sh --pip, -p    Install Python Pip packages and libraries
@@ -246,62 +246,63 @@ function kaliSync() {
 }
 
 # Main:
-
-if [[ $1 == "-h" ]] || [[ $1 == "--help" ]];
-then
-    help
-elif [ $# == 0 ]
-then
-    read -p "AutoKali will perform the following:
-[*] Install Apt and Gem Programs
-[*] Install Git Programs and Scripts
-[*] Perform Metasploit Exploit-DB Setup
-[*] Install Python Pip Packages
-[y/N] to continue, or lauch AutoKali with [-h/--help] to see more options: " choice
-    if [[ $choice == "y" ]] || [[ $choice == "Y" ]];
+function main() {
+    if [[ $1 == "-h" ]] || [[ $1 == "--help" ]];
     then
-        echo -e "${GREEN}\r\n[*] Installing all programs!\n\r${ENDCOLOR}"
-        kaliSync
-        programsCore
-        programsGit
-        metasploitInit
-        pipInstall
-    else
-        echo -e "${RED}\r\nExiting AutoKali\n\r${ENDCOLOR}"
-        exit 0
-    fi
-else
-    for ARG in $@
-    do
-        if [[ $ARG != "-c" ]] && [[ $ARG != "--core" ]] && [[ $ARG != "-g" ]] && [[ $ARG != "--git" ]] && [[ $ARG != "-m" ]] && [[ $ARG != "--meta" ]] && [[ $ARG != "-p" ]] && [[ $ARG != "--pip" ]];
+        help
+    elif [ $# == 0 ]
+    then
+        read -p "AutoKali will perform the following:
+    [*] Install Apt and Gem Programs
+    [*] Install Git Programs and Scripts
+    [*] Perform Metasploit Exploit-DB Setup
+    [*] Install Python Pip Packages
+    [y/N] to continue, or lauch AutoKali with [-h/--help] to see more options: " choice
+        if [[ $choice == "y" ]] || [[ $choice == "Y" ]];
         then
-            help
-        fi
-    done
-    kaliSync
-    for ARG in $@
-    do
-        if [[ $ARG == "-c" ]] || [[ $ARG == "--core" ]];
-        then
-            echo -e "${GREEN}\r\n[*] Installing Apt and Gem Programs!\n\r${ENDCOLOR}"
+            echo -e "${GREEN}\r\n[*] Installing all programs!\n\r${ENDCOLOR}"
+            kaliSync
             programsCore
-        elif [[ $ARG == "-g" ]] || [[ $ARG == "--git" ]];
-        then
-            echo -e "${GREEN}\r\n[*] Installing Git Programs and Scripts!\n\r${ENDCOLOR}"
             programsGit
-        elif [[ $ARG == "-m" ]] || [[ $ARG == "--meta" ]];
-        then
-            echo -e "${GREEN}\r\n[*] Performing Metasploit Exploit-DB Setup!\n\r${ENDCOLOR}"
             metasploitInit
-        elif [[ $ARG == "-p" ]] || [[ $ARG == "--pip" ]];
-        then
-            echo -e "${GREEN}\r\n[*] Installing Python Pip Packages!\n\r${ENDCOLOR}"
             pipInstall
+        else
+            echo -e "${RED}\r\nExiting AutoKali\n\r${ENDCOLOR}"
+            exit 0
         fi
-    done  
-fi
+    else
+        for ARG in $@
+        do
+            if [[ $ARG != "-c" ]] && [[ $ARG != "--core" ]] && [[ $ARG != "-g" ]] && [[ $ARG != "--git" ]] && [[ $ARG != "-m" ]] && [[ $ARG != "--meta" ]] && [[ $ARG != "-p" ]] && [[ $ARG != "--pip" ]];
+            then
+                help
+            fi
+        done
+        kaliSync
+        for ARG in $@
+        do
+            if [[ $ARG == "-c" ]] || [[ $ARG == "--core" ]];
+            then
+                echo -e "${GREEN}\r\n[*] Installing Apt and Gem Programs!\n\r${ENDCOLOR}"
+                programsCore
+            elif [[ $ARG == "-g" ]] || [[ $ARG == "--git" ]];
+            then
+                echo -e "${GREEN}\r\n[*] Installing Git Programs and Scripts!\n\r${ENDCOLOR}"
+                programsGit
+            elif [[ $ARG == "-m" ]] || [[ $ARG == "--meta" ]];
+            then
+                echo -e "${GREEN}\r\n[*] Performing Metasploit Exploit-DB Setup!\n\r${ENDCOLOR}"
+                metasploitInit
+            elif [[ $ARG == "-p" ]] || [[ $ARG == "--pip" ]];
+            then
+                echo -e "${GREEN}\r\n[*] Installing Python Pip Packages!\n\r${ENDCOLOR}"
+                pipInstall
+            fi
+        done  
+    fi
+}
 
-main
+main $@
 sudo apt upgrade # Kali System Upgrade
 
 exit 0
