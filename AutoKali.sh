@@ -1,6 +1,17 @@
 #!/bin/bash
 
-# AutoKali v 1.0.5
+# AutoKali v 1.0.6
+# Author: https://github.com/vaarg/
+
+# Usage:
+    # ./AutoKali.sh (for all changes, y/N prompt to confirm)
+    # ./AutoKali.sh --apt/-a    Install only Apt and Gem programs
+    # ./AutoKali.sh --git/-g    Install only Git scripts and programs
+    # ./AutoKali.sh --meta/-m   Perform Metasploit Exploit-DB setup
+    # ./AutoKali.sh --pip/-p    Install Python Pip packages and libraries
+# Description:
+    # AutoKali automatically installs useful programs and scripts for recon, enumeration and exploitation for Kali Linux 
+    # that aren't included by default, as well as essential programs for any Kali user.   
 
 check=0
 ARGS=$@
@@ -99,7 +110,7 @@ function programsAptGem() { ## APT/GEM Programs:
     aptInstall sublist3r                        # Domain enumerator
     aptInstall zaproxy                          # OWASP Zap (~Burp eqv)
 
-    # Data Analysis:
+    # File Analysis:
     aptInstall exiftool                         # Image Metadata Analyser
     aptInstall pst-utils                        # Outlook pst viewer & utils
 
@@ -109,7 +120,8 @@ function programsAptGem() { ## APT/GEM Programs:
 
     # AD/Win Tools
     aptInstall bloodhound                       # AD/Azure enumerator
-    gemInstall evil-winrm                       # Windows hacking shell              
+    gemInstall evil-winrm                       # Windows hacking shell
+    sudo pip install Mitm6                      # Windows mitm pentesting tool              
 
     # VSCode:
     checkInstall code
@@ -127,7 +139,7 @@ function programsAptGem() { ## APT/GEM Programs:
     check=1
 }
 
-function programsGit() { ## GIT Programs:
+function programsGit() { ## GIT Scripts & Programs:
     cd ~/Desktop && gitFolderCreate ReconAndEnumTools
 
     # PortEnum:
@@ -268,3 +280,6 @@ main
 sudo apt upgrade # Kali System Upgrade
 
 exit 0
+
+# To:
+# - Nessus
