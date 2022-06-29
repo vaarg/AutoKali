@@ -22,4 +22,7 @@
 - [Absolomb's Windows PrivEsc Guide](https://www.absolomb.com/2018-01-26-Windows-Privilege-Escalation-Guide/)
 - [FuzzySecurity's Windows PrivEsc Fundamentals](https://www.fuzzysecurity.com/tutorials/16.html)
 
+# Tools & Utilities:
+- [Reverse Shell Generator](https://www.revshells.com/)
+
 [To be expanded - AD, WebApp, etc.]
