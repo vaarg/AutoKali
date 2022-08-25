@@ -19,6 +19,7 @@
 | LTrace | Library Call Tracer | Reverse Engineering/Tracing |
 | BloodHound | Active Directory Enumerator/Visualiser | AD/Win Tools |
 | Evil-WinRM | Windows Hacking Shell | AD/Win Tools |
+| EDB-Debugger | Debugger & Buffer Overflow Eng Tool | Linux Tools |
 | Visual Studio Code | Source Code Editor/IDE | AD/Win Tools |
 | [To add...!] | [To add...!] | [To add...!] |
 
