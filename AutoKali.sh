@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.17
+# AutoKali v 1.0.18
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -137,6 +137,15 @@ function programsCore() { ## APT/GEM Programs:
     # AD/Win Tools
     aptInstall bloodhound                       # AD/Azure enumerator
     gemInstall evil-winrm                       # Windows hacking shell           
+
+    # EDB Debugger:
+    checkInstall edb
+    if [ "$?" -eq 0 ]
+    then
+        echo -e "${GREEN}\r\n[*] VSCode is already installed!\n\r${ENDCOLOR}"
+    else
+        aptInstall edb-debugger
+    fi
 
     # VSCode:
     checkInstall code
