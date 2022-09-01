@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.18
+# AutoKali v 1.0.19
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -125,6 +125,9 @@ function programsCore() { ## APT/GEM Programs:
     # Web Enum:
     aptInstall sublist3r                        # Domain enumerator
     aptInstall zaproxy                          # OWASP Zap (~Burp eqv)
+    
+    # Browser Exploitation:
+    aptInstall beef-xss                         # Browser Exploitation Framework
 
     # File Analysis:
     aptInstall exiftool                         # Image Metadata Analyser
