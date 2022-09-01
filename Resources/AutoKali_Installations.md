@@ -13,6 +13,7 @@
 | GoBuster | Directory/Subdom enumerator | Recon/WebEnum |
 | Sublist3r | Domain enumerator | Recon/WebEnum |
 | Zaproxy | OWASP Zap (~BurpSuite eqv) | Recon/WebEnum |
+| Beef-XSS | Browser Exploitation Framework (BeEF) | Browser Exploitation |
 | Exiftool | Image Metadata Analyser | File Analysis |
 | PST-Utils | Outlook pst Viewer & Utils | File Analysis |
 | Ghidra | NSA Reverse Engineering Tool | Reverse Engineering/Tracing |
