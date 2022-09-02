@@ -4,6 +4,7 @@
 | Name | Description | Category |
 | --------------- | --------------- | --------------- | 
 | GCC-mingw-w64 | GCC Compiler+ | Core |
+| Wine | Windows compatibility layer for POSIX systems | Core |
 | GoLang | Go Language | Core |
 | libwacom-common | libwacom-common library | Core |
 | PyPi2 (Pip2) | Python Package Index for Python 2.7 | Core |
