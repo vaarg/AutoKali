@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.19
+# AutoKali v 1.0.20
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -96,6 +96,7 @@ function pipInstall() {
 function programsCore() { ## APT/GEM Programs:
     # Core:
     aptInstall gcc-mingw-w64                    # mingw GCC
+    aptInstall wine                             # Windows compatibility layer for POSIX systems
     aptInstall golang                           # Install Golang
     if [ "$?" -eq 0 ]
     then
