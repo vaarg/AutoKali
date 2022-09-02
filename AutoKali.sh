@@ -97,6 +97,14 @@ function programsCore() { ## APT/GEM Programs:
     # Core:
     aptInstall gcc-mingw-w64                    # mingw GCC
     aptInstall wine                             # Windows compatibility layer for POSIX systems
+    if [ "$?" -eq 0 ]
+    then
+        sudo dpkg --add-architecture i386
+        kaliSync()
+        sudo apt install wine32:i386
+    else
+        return 1
+    fi
     aptInstall golang                           # Install Golang
     if [ "$?" -eq 0 ]
     then
