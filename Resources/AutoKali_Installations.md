@@ -17,6 +17,7 @@
 | Beef-XSS | Browser Exploitation Framework (BeEF) | Browser Exploitation |
 | Exiftool | Image Metadata Analyser | File Analysis |
 | PST-Utils | Outlook pst Viewer & Utils | File Analysis |
+| Pure-FTPd | Secure FTP Server | File Transfer |
 | Ghidra | NSA Reverse Engineering Tool | Reverse Engineering/Tracing |
 | LTrace | Library Call Tracer | Reverse Engineering/Tracing |
 | BloodHound | Active Directory Enumerator/Visualiser | AD/Win Tools |
