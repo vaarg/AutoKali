@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.20
+# AutoKali v 1.0.21
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -141,6 +141,9 @@ function programsCore() { ## APT/GEM Programs:
     # File Analysis:
     aptInstall exiftool                         # Image Metadata Analyser
     aptInstall pst-utils                        # Outlook pst viewer & utils
+    
+    # File Transfer:
+    aptInstall pure-ftpd                        # Secure FTP Server
 
     # Reverse Engineering and Tracing:
     aptInstall ghidra                           # NSA Reverse Engineering Tool
