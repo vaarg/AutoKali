@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.21
+# AutoKali v 1.0.22
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -148,6 +148,9 @@ function programsCore() { ## APT/GEM Programs:
     # Reverse Engineering and Tracing:
     aptInstall ghidra                           # NSA Reverse Engineering Tool
     aptInstall ltrace                           # Library call tracer
+    
+    # Anti-Virus Evasion:
+    aptInstall shellter                         # Shellcode Injection Tool and Dynamic PE Infector
 
     # AD/Win Tools
     aptInstall bloodhound                       # AD/Azure enumerator
