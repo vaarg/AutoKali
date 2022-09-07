@@ -25,7 +25,6 @@
 | Evil-WinRM | Windows Hacking Shell | AD/Win Tools |
 | EDB-Debugger | Debugger & Buffer Overflow Eng Tool | Linux Tools |
 | Visual Studio Code | Source Code Editor/IDE | AD/Win Tools |
-| [To add...!] | [To add...!] | [To add...!] |
 
 ## Git Scripts/Programs (--git/-g):
 
