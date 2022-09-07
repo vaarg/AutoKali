@@ -20,6 +20,7 @@
 | Pure-FTPd | Secure FTP Server | File Transfer |
 | Ghidra | NSA Reverse Engineering Tool | Reverse Engineering/Tracing |
 | LTrace | Library Call Tracer | Reverse Engineering/Tracing |
+| Shellter | Shellcode Injection Tool and Dynamic PE Infector | Anti-Virus Evasion |
 | BloodHound | Active Directory Enumerator/Visualiser | AD/Win Tools |
 | Evil-WinRM | Windows Hacking Shell | AD/Win Tools |
 | EDB-Debugger | Debugger & Buffer Overflow Eng Tool | Linux Tools |
