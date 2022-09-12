@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.22
+# AutoKali v 1.0.23
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -137,6 +137,9 @@ function programsCore() { ## APT/GEM Programs:
     
     # Browser Exploitation:
     aptInstall beef-xss                         # Browser Exploitation Framework
+    
+    # Bruteforcing and Password Attacks:
+    aptInstall crowbar                          # Bruteforcing Tool
 
     # File Analysis:
     aptInstall exiftool                         # Image Metadata Analyser
