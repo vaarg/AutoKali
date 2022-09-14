@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.23
+# AutoKali v 1.0.24
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -147,6 +147,9 @@ function programsCore() { ## APT/GEM Programs:
     
     # File Transfer:
     aptInstall pure-ftpd                        # Secure FTP Server
+    
+    # Port-Forwarding:
+    aptInstall rinetd                           # Port-Forwarding & Redirection Server
 
     # Reverse Engineering and Tracing:
     aptInstall ghidra                           # NSA Reverse Engineering Tool
