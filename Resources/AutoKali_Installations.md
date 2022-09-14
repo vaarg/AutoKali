@@ -19,6 +19,7 @@
 | Exiftool | Image Metadata Analyser | File Analysis |
 | PST-Utils | Outlook pst Viewer & Utils | File Analysis |
 | Pure-FTPd | Secure FTP Server | File Transfer |
+| RINETD | Port-Forwarding & Redirection Server | File Transfer & Pivoting |
 | Ghidra | NSA Reverse Engineering Tool | Reverse Engineering/Tracing |
 | LTrace | Library Call Tracer | Reverse Engineering/Tracing |
 | Shellter | Shellcode Injection Tool and Dynamic PE Infector | Anti-Virus Evasion |
