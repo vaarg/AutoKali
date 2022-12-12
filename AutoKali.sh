@@ -11,7 +11,8 @@
     # ./AutoKali.sh --pip, -p    Install Python Pip packages and libraries
 # Description:
     # AutoKali automatically installs useful programs and scripts for recon, enumeration and exploitation for Kali Linux 
-    # that aren't included by default, as well as essential programs for any Kali user.   
+    # that aren't included by default, as well as essential programs for any Kali user.
+    # For a list of installations visit https://github.com/vaarg/AutoKali/blob/main/Resources/AutoKali_Installations.md
 
 check=0
 ARGS=$@
@@ -263,7 +264,8 @@ Options:
 -c, --core          Install Apt and Gem Programs
 -g, --git           Install Git Programs and Scripts
 -m, --meta          Perform Metasploit Exploit-DB Setup
--p, --pip           Install Python Pip Packages"
+-p, --pip           Install Python Pip Packages
+For a list of installations visit https://github.com/vaarg/AutoKali/blob/main/Resources/AutoKali_Installations.md"
     exit 1
 }
 
