@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.25
+# AutoKali v 1.0.26
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -166,7 +166,7 @@ function programsCore() { ## APT/GEM Programs:
     checkInstall edb
     if [ "$?" -eq 0 ]
     then
-        echo -e "${GREEN}\r\n[*] VSCode is already installed!\n\r${ENDCOLOR}"
+        echo -e "${GREEN}\r\n[*] EDB Debugger is already installed!\n\r${ENDCOLOR}"
     else
         aptInstall edb-debugger
     fi
