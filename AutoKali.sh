@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.26
+# AutoKali v 1.0.27
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -142,6 +142,7 @@ function programsCore() { ## APT/GEM Programs:
     aptInstall crowbar                          # Bruteforcing Tool
 
     # File Analysis:
+    aptInstall steghide                         # Steganography Tool
     aptInstall exiftool                         # Image Metadata Analyser
     aptInstall pst-utils                        # Outlook pst viewer & utils
     
