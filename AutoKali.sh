@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.24
+# AutoKali v 1.0.25
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -100,7 +100,7 @@ function programsCore() { ## APT/GEM Programs:
     if [ "$?" -eq 0 ]
     then
         sudo dpkg --add-architecture i386
-        kaliSync()
+        kaliSync
         sudo apt install wine32:i386
     else
         return 1
