@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.27
+# AutoKali v 1.0.28
 # Author: https://github.com/vaarg/
 
 # Usage:
