@@ -132,9 +132,10 @@ function programsCore() { ## APT/GEM Programs:
     aptInstall assetfinder                      # Domain/Subdomain enumerator
     aptInstall gobuster                         # Directory/Subdom enumerator
 
-    # Web Enum:
+    # Web Enum & Tools:
     aptInstall sublist3r                        # Domain enumerator
     aptInstall zaproxy                          # OWASP Zap (~Burp eqv)
+    aptInstall php-curl                         # PHP Tools
     
     # Browser Exploitation:
     aptInstall beef-xss                         # Browser Exploitation Framework
