@@ -14,6 +14,7 @@
 | GoBuster | Directory/Subdom enumerator | Recon/WebEnum |
 | Sublist3r | Domain enumerator | Recon/WebEnum |
 | Zaproxy | OWASP Zap (~BurpSuite eqv) | Recon/WebEnum |
+| php-curl | PHP Tools | Web Tools |
 | Beef-XSS | Browser Exploitation Framework (BeEF) | Browser Exploitation |
 | Crowbar | Bruteforcing Tool | Bruteforcing and Password Attacks |
 | Steghide | Steganography Tool | File Analysis |
