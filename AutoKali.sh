@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AutoKali v 1.0.28
+# AutoKali v 1.0.29
 # Author: https://github.com/vaarg/
 
 # Usage:
@@ -136,6 +136,9 @@ function programsCore() { ## APT/GEM Programs:
     aptInstall sublist3r                        # Domain enumerator
     aptInstall zaproxy                          # OWASP Zap (~Burp eqv)
     aptInstall php-curl                         # PHP Tools
+
+    # Wordlists
+    aptInstall seclists                        # Seclists wordlists
     
     # Browser Exploitation:
     aptInstall beef-xss                         # Browser Exploitation Framework
@@ -195,8 +198,8 @@ function programsGit() { ## GIT Scripts & Programs:
     cd ~/Desktop && gitFolderCreate ReconAndEnumTools
 
     # PortEnum:
-    gitFolderCreate PortEnum
-    gitInstall https://github.com/vaarg/Gatherum
+    # gitFolderCreate PortEnum
+    # gitInstall https://github.com/vaarg/Gatherum
 
     # LinuxEnum:
     cd ~/Desktop/ReconAndEnumTools && gitFolderCreate LinuxEnum
