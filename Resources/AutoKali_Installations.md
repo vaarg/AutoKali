@@ -14,6 +14,7 @@
 | GoBuster | Directory/Subdom enumerator | Recon/WebEnum |
 | Sublist3r | Domain enumerator | Recon/WebEnum |
 | Zaproxy | OWASP Zap (~BurpSuite eqv) | Recon/WebEnum |
+| Seclists | Seclists wordlists | Wordlists |
 | php-curl | PHP Tools | Web Tools |
 | Beef-XSS | Browser Exploitation Framework (BeEF) | Browser Exploitation |
 | Crowbar | Bruteforcing Tool | Bruteforcing and Password Attacks |
@@ -64,7 +65,6 @@
 **Recon, Information Gathering & Network Enumeration**:
 | Name | Description/Type | Source |
 | --------------- | --------------- | --------------- |
-| Gatherum | Nmap Based Port Enumerator | https://github.com/vaarg/Gatherum |
 | Breach Parse | Breach Passwords Parser - for Data Breaches | https://github.com/hmaverickadams/breach-parse |
 | HTTProbe | Takes Domain List, probes for HTTP/HTTPs Servers | https://github.com/tomnomnom/httprobe |
 | GoWitness | Chromium Web Screenshotter | https://github.com/sensepost/gowitness |
